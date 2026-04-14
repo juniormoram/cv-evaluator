@@ -1,36 +1,103 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# CV Evaluator — AI-Powered Resume Analyzer
 
-## Getting Started
+Aplicación web que analiza CVs en PDF usando Inteligencia Artificial y los evalúa en relación a una descripción de puesto, entregando puntajes, fortalezas, debilidades y recomendaciones en segundos.
 
-First, run the development server:
+🔗 **[Ver demo en vivo](https://cv-evaluator-nine.vercel.app/)**
+
+---
+
+## Vista previa
+
+> Sube un CV → ingresa el puesto → obtén un análisis completo con IA
+
+---
+
+## Funcionalidades
+
+- 📄 Carga de CV en formato PDF con drag & drop
+- 💼 Evaluación contra una descripción de puesto específica
+- 🧠 Análisis con Claude AI (Anthropic) — modelo Sonnet 4.6
+- 📊 Puntaje general y por categorías (Experiencia, Habilidades, Educación, Match)
+- ✅ Fortalezas, áreas de mejora y habilidades detectadas
+- 💡 Feedback detallado y recomendación final
+- 🔐 API Key segura en el servidor (nunca expuesta al cliente)
+
+---
+
+## Stack tecnológico
+
+| Tecnología | Uso |
+|---|---|
+| Next.js 15 (App Router) | Framework frontend + backend |
+| Tailwind CSS | Estilos |
+| Claude API (Anthropic) | Motor de análisis con IA |
+| Vercel | Deploy y hosting |
+
+---
+
+## Cómo correrlo localmente
+
+### 1. Clona el repositorio
+
+```bash
+git clone https://github.com/juniormoram/cv-evaluator.git
+cd cv-evaluator
+```
+
+### 2. Instala dependencias
+
+```bash
+npm install
+```
+
+### 3. Configura las variables de entorno
+
+Crea un archivo `.env.local` en la raíz del proyecto:
+
+```env
+ANTHROPIC_API_KEY=sk-ant-api03-tu-clave-aqui
+```
+
+Obtén tu API Key en [console.anthropic.com](https://console.anthropic.com)
+
+### 4. Inicia el servidor de desarrollo
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abre [http://localhost:3000](http://localhost:3000) en tu navegador.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Arquitectura
 
-## Learn More
+```
+Usuario sube PDF
+      ↓
+Frontend (Next.js) — convierte PDF a base64
+      ↓
+API Route /api/evaluate — recibe el PDF de forma segura
+      ↓
+Claude API — analiza el CV con el prompt de evaluación
+      ↓
+JSON estructurado con puntajes y feedback
+      ↓
+UI renderiza el reporte
+```
 
-To learn more about Next.js, take a look at the following resources:
+La API Key nunca sale del servidor — el frontend solo se comunica con la API Route interna de Next.js.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Variables de entorno
 
-## Deploy on Vercel
+| Variable | Descripción |
+|---|---|
+| `ANTHROPIC_API_KEY` | Clave de la API de Anthropic |
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Autor
+
+**Junior Mora** — [github.com/juniormoram](https://github.com/juniormoram)
